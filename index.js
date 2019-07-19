@@ -42,7 +42,7 @@ function getFact(obj) {
 
 bot.on('message', (msg) => {
   const chatId = msg.chat.id;
-  const text = msg.text.trim();
+  const text = msg.text.trim().toLocaleLowerCase();
   const username = msg.chat.first_name;
 
   if (text == '/start') {
@@ -50,7 +50,7 @@ bot.on('message', (msg) => {
     bot.sendMessage(chatId, start_message, options);
   }
 
-  if (text.toLocaleLowerCase().includes('get dog')) {
+  if (text.includes('get dog')) {
     getImage('dog')
     .then(data => bot.sendPhoto(chatId, data.link, optionsAfterSendPic)
     .catch(error => bot.sendMessage(chatId, 'Ooops, something wrong', options))
@@ -59,7 +59,7 @@ bot.on('message', (msg) => {
     .catch(error => bot.sendMessage(chatId, 'Ooops, something wrong', options)))))
   }
 
-  if (text.toLocaleLowerCase().includes('get cat')) {
+  if (text.includes('get cat')) {
     getImage('cat')
     .then(data => bot.sendPhoto(chatId, data.link, optionsAfterSendPic)
     .catch(error => bot.sendMessage(chatId, 'Ooops, something wrong', options))
@@ -68,7 +68,7 @@ bot.on('message', (msg) => {
     .catch(error => bot.sendMessage(chatId, 'Ooops, something wrong', options)))))
   }
 
-  if (text.toLocaleLowerCase().includes('get panda')) {
+  if (text.includes('get panda')) {
     getImage('panda')
     .then(data => bot.sendPhoto(chatId, data.link, optionsAfterSendPic)
     .catch(error => bot.sendMessage(chatId, 'Ooops, something wrong', options))
