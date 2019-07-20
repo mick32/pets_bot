@@ -16,12 +16,12 @@ bot.on("message", msg => {
 
   if (text.includes("get dog")) {
     getImage("dog")
-      .then(data =>
+      .then(link =>
         bot
-          .sendPhoto(chatId, data.link, removeKeyboard)
+          .sendPhoto(chatId, link, removeKeyboard)
           .then(() =>
-            getFact("dog").then(data =>
-              bot.sendMessage(chatId, data.fact, DefaultKeyboad)
+            getFact("dog").then(fact =>
+              bot.sendMessage(chatId, fact, DefaultKeyboad)
             )
           )
       )
@@ -32,12 +32,12 @@ bot.on("message", msg => {
 
   if (text.includes("get cat")) {
     getImage("cat")
-      .then(data =>
+      .then(link =>
         bot
-          .sendPhoto(chatId, data.link, removeKeyboard)
+          .sendPhoto(chatId, link, removeKeyboard)
           .then(() =>
-            getFact("cat").then(data =>
-              bot.sendMessage(chatId, data.fact, DefaultKeyboad)
+            getFact("cat").then(fact =>
+              bot.sendMessage(chatId, fact, DefaultKeyboad)
             )
           )
       )
@@ -48,12 +48,12 @@ bot.on("message", msg => {
 
   if (text.includes("get panda")) {
     getImage("panda")
-      .then(data =>
+      .then(link =>
         bot
-          .sendPhoto(chatId, data.link, removeKeyboard)
+          .sendPhoto(chatId, link, removeKeyboard)
           .then(() =>
-            getFact("panda").then(data =>
-              bot.sendMessage(chatId, data.fact, DefaultKeyboad)
+            getFact("panda").then(fact =>
+              bot.sendMessage(chatId, fact, DefaultKeyboad)
             )
           )
       )
