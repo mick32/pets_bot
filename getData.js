@@ -1,6 +1,6 @@
 const fetch = require("node-fetch");
 
-async function getImage(pet) {
+const getImage = async pet => {
   const url = {
     dog: "https://some-random-api.ml/img/dog",
     cat: "https://some-random-api.ml/img/cat",
@@ -12,9 +12,9 @@ async function getImage(pet) {
     .catch(error => console.error(error));
 
   return data.link;
-}
+};
 
-async function getFact(pet) {
+const getFact = async pet => {
   const url = {
     dog: "https://some-random-api.ml/facts/dog",
     cat: "https://some-random-api.ml/facts/cat",
@@ -26,7 +26,7 @@ async function getFact(pet) {
     .catch(error => console.error(error));
 
   return data.fact;
-}
+};
 
 exports.getImage = getImage;
 exports.getFact = getFact;
