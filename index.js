@@ -2,7 +2,7 @@ const TelegramBot = require("node-telegram-bot-api");
 const token = "";
 const bot = new TelegramBot(token, { polling: true });
 const { getFact, getImage } = require("./getData");
-const { DefaultKeyboad, removeKeyboard } = require("./keyboard_options");
+const { DefaultKeyboad, removeKeyboard } = require("./keyboardOptions");
 
 bot.on("message", msg => {
   const chatId = msg.chat.id;
