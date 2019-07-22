@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "firebase-admin": "^8.2.0",
     "node-fetch": "^2.6.0",
     "node-telegram-bot-api": "^0.30.0"
   }

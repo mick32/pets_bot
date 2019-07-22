@@ -3,6 +3,7 @@ const token = "";
 const bot = new TelegramBot(token, { polling: true });
 const { getFact, getImage } = require("./getData");
 const { DefaultKeyboad, removeKeyboard } = require("./keyboardOptions");
+const { saveUserData } = require("./firebase");
 
 bot.on("message", msg => {
   const chatId = msg.chat.id;
@@ -12,6 +13,8 @@ bot.on("message", msg => {
   if (text == "/start") {
     const start_message = `Hi, ${username}! I can send animals pic for you =)`;
     bot.sendMessage(chatId, start_message, DefaultKeyboad);
+
+    saveUserData(chatId, from, username);
   }
 
   if (text.includes("get dog")) {
