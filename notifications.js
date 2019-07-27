@@ -13,7 +13,7 @@ admin.initializeApp({
 
 const db = admin.database();
 
-const sendNotifications = async () => {
+const sendNotifications = () => {
   const message =
     "Хэй, не забывай посмотреть на своих любимых зверушек. Они скучают по тебе =)";
 
