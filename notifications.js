@@ -13,7 +13,7 @@ admin.initializeApp({
 
 const db = admin.database();
 
-const usersNotifications = async () => {
+const sendNotifications = async () => {
   const message =
     "Хэй, не забывай посмотреть на своих любимых зверушек. Они скучают по тебе =)";
 
@@ -21,7 +21,7 @@ const usersNotifications = async () => {
     const userChatId = Object.keys(snap.val());
     for (let chatId of userChatId) {
       try {
-        bot.sendMessage(chatId, "Эй, арбузы пакупай па 4.20");
+        bot.sendMessage(chatId, message);
       } catch (err) {
         console.log(
           "Something went wrong when trying to send a Telegram notification",
@@ -32,4 +32,4 @@ const usersNotifications = async () => {
   });
 };
 
-usersNotifications();
+sendNotifications();
