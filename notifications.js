@@ -37,27 +37,25 @@ const currentYear = currentDate.getFullYear();
 const currentMonth = currentDate.getMonth() + 1;
 const currentDay = currentDate.getDay();
 
-const sendNotifications = async () => {
+const sendNotifications1 = async () => {
   const requestData = await db.ref("users/").once("value");
   const data = requestData.val();
   let result = [];
 
   for (let user in data) {
-    try {
-      if (data[user].hasOwnProperty("last_usage")) {
-        const last_usage = data[user].last_usage.split("/");
-        const userMonth = last_usage[0];
-        const userDay = last_usage[1];
-        const userYear = last_usage[2];
+    if (data[user].hasOwnProperty("last_usage")) {
+      const last_usage = data[user].last_usage.split("/");
+      const userMonth = last_usage[0];
+      const userDay = last_usage[1];
+      const userYear = last_usage[2];
 
-        result.push(data[user].id);
-      }
-    } catch {
-      console.log("error");
+      result.push(data[user].id);
     }
   }
 
   console.log(result);
 };
 
-sendNotifications();
+sendNotifications1();
+
+//sendNotifications
