@@ -1,5 +1,6 @@
 const TelegramBot = require("node-telegram-bot-api");
-const token = "";
+require("dotenv").config();
+const token = process.env.TEST_TOKEN;
 const bot = new TelegramBot(token, { polling: true });
 const { getFact, getImage } = require("./getData");
 const { DefaultKeyboad, removeKeyboard } = require("./keyboardOptions");

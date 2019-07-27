@@ -23,4 +23,4 @@ const saveUserData = (chatId, from, firstname) => {
   });
 };
 
-exports.saveData = saveData;
+exports.saveUserData = saveUserData;
