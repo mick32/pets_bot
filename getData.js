@@ -1,13 +1,9 @@
 const fetch = require("node-fetch");
 
 const getImage = async pet => {
-  const url = {
-    dog: "https://some-random-api.ml/img/dog",
-    cat: "https://some-random-api.ml/img/cat",
-    panda: "https://some-random-api.ml/img/panda"
-  };
+  const url = `https://some-random-api.ml/img/${pet}`;
 
-  const data = await fetch(url[pet])
+  const data = await fetch(url)
     .then(response => response.json())
     .catch(error => console.error(error));
 
@@ -15,13 +11,9 @@ const getImage = async pet => {
 };
 
 const getFact = async pet => {
-  const url = {
-    dog: "https://some-random-api.ml/facts/dog",
-    cat: "https://some-random-api.ml/facts/cat",
-    panda: "https://some-random-api.ml/facts/panda"
-  };
+  const url = `https://some-random-api.ml/facts/${pet}`;
 
-  const data = await fetch(url[pet])
+  const data = await fetch(url)
     .then(response => response.json())
     .catch(error => console.error(error));
 
