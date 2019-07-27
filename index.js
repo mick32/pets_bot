@@ -10,12 +10,17 @@ bot.on("message", msg => {
   const chatId = msg.chat.id;
   const text = msg.text.trim().toLocaleLowerCase();
   const username = msg.chat.first_name;
+  const langCode = msg.from.language_code;
 
   if (text == "/start") {
     const start_message = `Hi, ${username}! I can send animals pic for you =)`;
     bot.sendMessage(chatId, start_message, DefaultKeyboad);
 
-    saveUserData(chatId, from, username);
+    try {
+      saveUserData(chatId, langCode, username);
+    } catch {
+      console.log("error save data");
+    }
   }
 
   if (text.includes("get dog")) {

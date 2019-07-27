@@ -9,10 +9,6 @@ admin.initializeApp({
 
 const db = admin.database();
 
-const db_value = db.ref("users/").once("value", snap => {
-  console.log(snap.val());
-});
-
 const saveUserData = (chatId, from, firstname) => {
   const docRef = db.ref("users/" + chatId);
 
