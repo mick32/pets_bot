@@ -10,11 +10,13 @@ const db = admin.database();
 
 const saveUserData = (chatId, from, firstname) => {
   const docRef = db.ref("users/" + chatId);
+  const date = new Date().toLocaleDateString("ru-RU");
 
   docRef.set({
     id: chatId,
     country: from,
-    firstname: firstname
+    firstname: firstname,
+    last_usage: date
   });
 };
 
