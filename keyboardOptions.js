@@ -1,6 +1,9 @@
 const DefaultKeyboad = {
   reply_markup: {
-    keyboard: [["Get dog 🐶", "Get cat 🐱", "Get panda 🐼"]],
+    keyboard: [
+      ["Get dog 🐶", "Get cat 🐱"],
+      ["Get panda 🐼", "Get koala 🐨", "Get fox 🦊"]
+    ],
     resize_keyboard: true
   }
 };
@@ -12,4 +15,3 @@ const removeKeyboard = {
 };
 
 exports.DefaultKeyboad = DefaultKeyboad;
-exports.removeKeyboard = removeKeyboard;
