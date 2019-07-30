@@ -2,7 +2,7 @@ const TelegramBot = require("node-telegram-bot-api");
 require("dotenv").config();
 const token = process.env.TEST_TOKEN;
 const bot = new TelegramBot(token, { polling: true });
-const { getFact, getImage } = require("./getData");
+const getPhotoAndFact = require("./getData");
 const { DefaultKeyboad, removeKeyboard } = require("./keyboardOptions");
 const { saveUserData } = require("./firebase");
 
@@ -24,15 +24,13 @@ bot.on("message", msg => {
   }
 
   if (text.includes("get dog")) {
-    getImage("dog")
-      .then(link =>
-        bot
-          .sendPhoto(chatId, link, removeKeyboard)
-          .then(() =>
-            getFact("dog").then(fact =>
-              bot.sendMessage(chatId, fact, DefaultKeyboad)
-            )
-          )
+    getPhotoAndFact("dog")
+      .then(data =>
+        bot.sendPhoto(
+          chatId,
+          data.photo,
+          Object.assign(DefaultKeyboad, { caption: data.fact })
+        )
       )
       .catch(error =>
         bot.sendMessage(chatId, "Ooops, something wrong", DefaultKeyboad)
@@ -40,15 +38,13 @@ bot.on("message", msg => {
   }
 
   if (text.includes("get cat")) {
-    getImage("cat")
-      .then(link =>
-        bot
-          .sendPhoto(chatId, link, removeKeyboard)
-          .then(() =>
-            getFact("cat").then(fact =>
-              bot.sendMessage(chatId, fact, DefaultKeyboad)
-            )
-          )
+    getPhotoAndFact("cat")
+      .then(data =>
+        bot.sendPhoto(
+          chatId,
+          data.photo,
+          Object.assign(DefaultKeyboad, { caption: data.fact })
+        )
       )
       .catch(error =>
         bot.sendMessage(chatId, "Ooops, something wrong", DefaultKeyboad)
@@ -56,15 +52,13 @@ bot.on("message", msg => {
   }
 
   if (text.includes("get panda")) {
-    getImage("panda")
-      .then(link =>
-        bot
-          .sendPhoto(chatId, link, removeKeyboard)
-          .then(() =>
-            getFact("panda").then(fact =>
-              bot.sendMessage(chatId, fact, DefaultKeyboad)
-            )
-          )
+    getPhotoAndFact("panda")
+      .then(data =>
+        bot.sendPhoto(
+          chatId,
+          data.photo,
+          Object.assign(DefaultKeyboad, { caption: data.fact })
+        )
       )
       .catch(error =>
         bot.sendMessage(chatId, "Ooops, something wrong", DefaultKeyboad)
