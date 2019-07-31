@@ -12,11 +12,11 @@ bot.on("message", msg => {
   const username = msg.chat.first_name;
   const langCode = msg.from.language_code;
 
-    try {
-      saveUserData(chatId, langCode, username);
-    } catch {
-      console.log("error save data");
-    }
+  try {
+    saveUserData(chatId, langCode, username);
+  } catch {
+    console.log("error save data");
+  }
 
   if (text == "/start") {
     const start_message = `Hi, ${username}! I can send animals pic for you =)`;
