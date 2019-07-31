@@ -1,6 +1,6 @@
 require("dotenv").config();
 const TelegramBot = require("node-telegram-bot-api");
-const token = process.env.TEST_TOKEN;
+const token = process.env.TOKEN;
 const bot = new TelegramBot(token);
 
 const admin = require("firebase-admin");

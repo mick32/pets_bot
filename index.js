@@ -1,8 +1,10 @@
-const TelegramBot = require("node-telegram-bot-api");
 require("dotenv").config();
+
+const TelegramBot = require("node-telegram-bot-api");
 const token = process.env.TOKEN;
 const bot = new TelegramBot(token, { polling: true });
-const { getPhotoAndFact } = require("./getData");
+
+const { sendContentToUser } = require("./getData");
 const { DefaultKeyboad } = require("./keyboardOptions");
 const { saveUserData } = require("./firebase");
 
@@ -24,72 +26,42 @@ bot.on("message", msg => {
   }
 
   if (text.includes("get dog")) {
-    getPhotoAndFact("dog")
-      .then(data =>
-        bot.sendPhoto(
-          chatId,
-          data.photo,
-          Object.assign(DefaultKeyboad, { caption: data.fact })
-        )
-      )
-      .catch(error =>
-        bot.sendMessage(chatId, "Ooops, something wrong", DefaultKeyboad)
-      );
+    try {
+      sendContentToUser(chatId, "dog");
+    } catch {
+      bot.sendMessage(chatId, "Ooops, something wrong", DefaultKeyboad);
+    }
   }
 
   if (text.includes("get cat")) {
-    getPhotoAndFact("cat")
-      .then(data =>
-        bot.sendPhoto(
-          chatId,
-          data.photo,
-          Object.assign(DefaultKeyboad, { caption: data.fact })
-        )
-      )
-      .catch(error =>
-        bot.sendMessage(chatId, "Ooops, something wrong", DefaultKeyboad)
-      );
+    try {
+      sendContentToUser(chatId, "cat");
+    } catch {
+      bot.sendMessage(chatId, "Ooops, something wrong", DefaultKeyboad);
+    }
   }
 
   if (text.includes("get panda")) {
-    getPhotoAndFact("panda")
-      .then(data =>
-        bot.sendPhoto(
-          chatId,
-          data.photo,
-          Object.assign(DefaultKeyboad, { caption: data.fact })
-        )
-      )
-      .catch(error =>
-        bot.sendMessage(chatId, "Ooops, something wrong", DefaultKeyboad)
-      );
+    try {
+      sendContentToUser(chatId, "panda");
+    } catch {
+      bot.sendMessage(chatId, "Ooops, something wrong", DefaultKeyboad);
+    }
   }
 
   if (text.includes("get koala")) {
-    getPhotoAndFact("koala")
-      .then(data =>
-        bot.sendPhoto(
-          chatId,
-          data.photo,
-          Object.assign(DefaultKeyboad, { caption: data.fact })
-        )
-      )
-      .catch(error =>
-        bot.sendMessage(chatId, "Ooops, something wrong", DefaultKeyboad)
-      );
+    try {
+      sendContentToUser(chatId, "koala");
+    } catch {
+      bot.sendMessage(chatId, "Ooops, something wrong", DefaultKeyboad);
+    }
   }
 
   if (text.includes("get fox")) {
-    getPhotoAndFact("fox")
-      .then(data =>
-        bot.sendPhoto(
-          chatId,
-          data.photo,
-          Object.assign(DefaultKeyboad, { caption: data.fact })
-        )
-      )
-      .catch(error =>
-        bot.sendMessage(chatId, "Ooops, something wrong", DefaultKeyboad)
-      );
+    try {
+      sendContentToUser(chatId, "fox");
+    } catch {
+      bot.sendMessage(chatId, "Ooops, something wrong", DefaultKeyboad);
+    }
   }
 });

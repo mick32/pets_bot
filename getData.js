@@ -1,24 +1,12 @@
+require("dotenv").config();
+
+const TelegramBot = require("node-telegram-bot-api");
+const token = process.env.TOKEN;
+const bot = new TelegramBot(token);
+
 const fetch = require("node-fetch");
 
-const getImage = async pet => {
-  const url = `https://some-random-api.ml/img/${pet}`;
-
-  const data = await fetch(url)
-    .then(response => response.json())
-    .catch(error => console.error(error));
-
-  return data.link;
-};
-
-const getFact = async pet => {
-  const url = `https://some-random-api.ml/facts/${pet}`;
-
-  const data = await fetch(url)
-    .then(response => response.json())
-    .catch(error => console.error(error));
-
-  return data.fact;
-};
+const { DefaultKeyboad } = require("./keyboardOptions");
 
 const getPhotoAndFact = async pet => {
   const factUrl = `https://some-random-api.ml/facts/${pet}`;
@@ -35,4 +23,14 @@ const getPhotoAndFact = async pet => {
   return { photo: photo.link, fact: fact.fact }; //to do: FACT NAMING!!!
 };
 
-exports.getPhotoAndFact = getPhotoAndFact;
+const sendContentToUser = async (chatId, pet) => {
+  const result = await getPhotoAndFact(pet);
+
+  bot.sendPhoto(
+    chatId,
+    result.photo,
+    Object.assign(DefaultKeyboad, { caption: result.fact })
+  );
+};
+
+exports.sendContentToUser = sendContentToUser;
