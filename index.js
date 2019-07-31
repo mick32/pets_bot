@@ -1,6 +1,6 @@
 const TelegramBot = require("node-telegram-bot-api");
 require("dotenv").config();
-const token = process.env.TEST_TOKEN;
+const token = process.env.TOKEN;
 const bot = new TelegramBot(token, { polling: true });
 const { getPhotoAndFact } = require("./getData");
 const { DefaultKeyboad } = require("./keyboardOptions");
@@ -12,15 +12,15 @@ bot.on("message", msg => {
   const username = msg.chat.first_name;
   const langCode = msg.from.language_code;
 
-  if (text == "/start") {
-    const start_message = `Hi, ${username}! I can send animals pic for you =)`;
-    bot.sendMessage(chatId, start_message, DefaultKeyboad);
-
     try {
       saveUserData(chatId, langCode, username);
     } catch {
       console.log("error save data");
     }
+
+  if (text == "/start") {
+    const start_message = `Hi, ${username}! I can send animals pic for you =)`;
+    bot.sendMessage(chatId, start_message, DefaultKeyboad);
   }
 
   if (text.includes("get dog")) {
