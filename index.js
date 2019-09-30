@@ -28,7 +28,7 @@ bot.on("message", msg => {
   if (text.includes("get dog")) {
     try {
       sendContentToUser(chatId, "dog");
-    } catch {
+    } catch (e) {
       bot.sendMessage(chatId, "Ooops, something wrong", DefaultKeyboad);
     }
   }
@@ -36,7 +36,7 @@ bot.on("message", msg => {
   if (text.includes("get cat")) {
     try {
       sendContentToUser(chatId, "cat");
-    } catch {
+    } catch (e) {
       bot.sendMessage(chatId, "Ooops, something wrong", DefaultKeyboad);
     }
   }
@@ -44,7 +44,7 @@ bot.on("message", msg => {
   if (text.includes("get panda")) {
     try {
       sendContentToUser(chatId, "panda");
-    } catch {
+    } catch (e) {
       bot.sendMessage(chatId, "Ooops, something wrong", DefaultKeyboad);
     }
   }
@@ -52,7 +52,7 @@ bot.on("message", msg => {
   if (text.includes("get koala")) {
     try {
       sendContentToUser(chatId, "koala");
-    } catch {
+    } catch (e) {
       bot.sendMessage(chatId, "Ooops, something wrong", DefaultKeyboad);
     }
   }
@@ -60,7 +60,7 @@ bot.on("message", msg => {
   if (text.includes("get fox")) {
     try {
       sendContentToUser(chatId, "fox");
-    } catch {
+    } catch (e) {
       bot.sendMessage(chatId, "Ooops, something wrong", DefaultKeyboad);
     }
   }
