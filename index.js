@@ -1,12 +1,12 @@
 require("dotenv").config();
 
 const TelegramBot = require("node-telegram-bot-api");
-const token = process.env.TOKEN;
+const token = "849839741:AAEj82xfVBGLXEK3TgJR8o4EpGrkjK1H2Ng";
 const bot = new TelegramBot(token, { polling: true });
 
 const { sendContentToUser } = require("./getData");
 const { DefaultKeyboad } = require("./keyboardOptions");
-const { saveUserData } = require("./firebase");
+const { saveUserData, saveUserClick } = require("./firebase");
 
 bot.on("message", msg => {
   const chatId = msg.chat.id;
@@ -28,6 +28,7 @@ bot.on("message", msg => {
   if (text.includes("get dog")) {
     try {
       sendContentToUser(chatId, "dog");
+      saveUserClick("dog");
     } catch (e) {
       bot.sendMessage(chatId, "Ooops, something wrong", DefaultKeyboad);
     }
@@ -36,6 +37,7 @@ bot.on("message", msg => {
   if (text.includes("get cat")) {
     try {
       sendContentToUser(chatId, "cat");
+      saveUserClick("cat");
     } catch (e) {
       bot.sendMessage(chatId, "Ooops, something wrong", DefaultKeyboad);
     }
@@ -44,6 +46,7 @@ bot.on("message", msg => {
   if (text.includes("get panda")) {
     try {
       sendContentToUser(chatId, "panda");
+      saveUserClick("panda");
     } catch (e) {
       bot.sendMessage(chatId, "Ooops, something wrong", DefaultKeyboad);
     }
@@ -52,6 +55,7 @@ bot.on("message", msg => {
   if (text.includes("get koala")) {
     try {
       sendContentToUser(chatId, "koala");
+      saveUserClick("koala");
     } catch (e) {
       bot.sendMessage(chatId, "Ooops, something wrong", DefaultKeyboad);
     }
@@ -60,6 +64,7 @@ bot.on("message", msg => {
   if (text.includes("get fox")) {
     try {
       sendContentToUser(chatId, "fox");
+      saveUserClick();
     } catch (e) {
       bot.sendMessage(chatId, "Ooops, something wrong", DefaultKeyboad);
     }

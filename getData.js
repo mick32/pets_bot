@@ -1,7 +1,7 @@
 require("dotenv").config();
 
 const TelegramBot = require("node-telegram-bot-api");
-const token = process.env.TOKEN;
+const token = "849839741:AAEj82xfVBGLXEK3TgJR8o4EpGrkjK1H2Ng";
 const bot = new TelegramBot(token);
 
 const fetch = require("node-fetch");
