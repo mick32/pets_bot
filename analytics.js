@@ -1,16 +1,18 @@
+require("dotenv").config();
+
 const admin = require("firebase-admin");
 const serviceAccount = require("./serviceAccountKey.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://petstestbot.firebaseio.com"
+  databaseURL: process.env.DB_URL
 });
 
 const db = admin.database();
+const date = new Date().toLocaleDateString("ru-RU");
 
 const saveUserData = (chatId, from, firstname) => {
-  const docRef = db.ref("users/" + chatId);
-  const date = new Date().toLocaleDateString("ru-RU");
+  const docRef = db.ref(`users/${chatId}`);
 
   docRef.set({
     id: chatId,
@@ -27,17 +29,18 @@ const saveUserClick = pet => {
   docRef.transaction(currentData => {
     if (!currentData) {
       return { [pet]: { clicks: 1 } };
-    } else if (currentData && !currentData[pet]) {
-      return { ...currentData, [pet]: { clicks: 1 } };
-    } else {
-      try {
-        console.log(currentData);
-        const prevClick = currentData[pet].clicks;
+    }
 
-        return { ...currentData, [pet]: { clicks: prevClick + 1 } };
-      } catch (e) {
-        console.log(e);
-      }
+    if (currentData && !currentData[pet]) {
+      return { ...currentData, [pet]: { clicks: 1 } };
+    }
+
+    try {
+      const currentClicks = currentData[pet].clicks;
+
+      return { ...currentData, [pet]: { clicks: currentClicks + 1 } };
+    } catch (e) {
+      console.log(e);
     }
   });
 };

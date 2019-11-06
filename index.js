@@ -1,72 +1,44 @@
 require("dotenv").config();
 
 const TelegramBot = require("node-telegram-bot-api");
-const token = "849839741:AAEj82xfVBGLXEK3TgJR8o4EpGrkjK1H2Ng";
+const token = process.env.TOKEN;
 const bot = new TelegramBot(token, { polling: true });
 
 const { sendContentToUser } = require("./getData");
 const { DefaultKeyboad } = require("./keyboardOptions");
-const { saveUserData, saveUserClick } = require("./firebase");
+const { saveUserData, saveUserClick } = require("./analytics");
 
-bot.on("message", msg => {
-  const chatId = msg.chat.id;
-  const text = msg.text.trim().toLocaleLowerCase();
-  const username = msg.chat.first_name;
-  const langCode = msg.from.language_code;
+const petMap = {
+  Собачка: "dog",
+  Котик: "cat",
+  Панда: "panda",
+  Коала: "koala",
+  Лиса: "fox"
+};
 
-  try {
-    saveUserData(chatId, langCode, username);
-  } catch {
-    console.log("error save data");
-  }
+bot.on("message", ({ chat, text, from }) => {
+  const chatId = chat.id;
+  const [pet] = text.split(" ");
+  const userName = chat.first_name;
+  const langCode = from.language_code;
 
   if (text == "/start") {
-    const start_message = `Hi, ${username}! I can send animals pic for you =)`;
+    const start_message = `Привет, ${userName}! Я могу отправить фото и факт о твоем любимом питомце =)`;
     bot.sendMessage(chatId, start_message, DefaultKeyboad);
+    saveUserData(chatId, langCode, userName);
+
+    return;
   }
 
-  if (text.includes("get dog")) {
-    try {
-      sendContentToUser(chatId, "dog");
-      saveUserClick("dog");
-    } catch (e) {
-      bot.sendMessage(chatId, "Ooops, something wrong", DefaultKeyboad);
-    }
+  try {
+    sendContentToUser(chatId, petMap[pet]);
+  } catch (e) {
+    bot.sendMessage(
+      chatId,
+      "Ой, что-то пошло не так. Попробуй еще раз",
+      DefaultKeyboad
+    );
   }
 
-  if (text.includes("get cat")) {
-    try {
-      sendContentToUser(chatId, "cat");
-      saveUserClick("cat");
-    } catch (e) {
-      bot.sendMessage(chatId, "Ooops, something wrong", DefaultKeyboad);
-    }
-  }
-
-  if (text.includes("get panda")) {
-    try {
-      sendContentToUser(chatId, "panda");
-      saveUserClick("panda");
-    } catch (e) {
-      bot.sendMessage(chatId, "Ooops, something wrong", DefaultKeyboad);
-    }
-  }
-
-  if (text.includes("get koala")) {
-    try {
-      sendContentToUser(chatId, "koala");
-      saveUserClick("koala");
-    } catch (e) {
-      bot.sendMessage(chatId, "Ooops, something wrong", DefaultKeyboad);
-    }
-  }
-
-  if (text.includes("get fox")) {
-    try {
-      sendContentToUser(chatId, "fox");
-      saveUserClick();
-    } catch (e) {
-      bot.sendMessage(chatId, "Ooops, something wrong", DefaultKeyboad);
-    }
-  }
+  saveUserClick(petMap[pet]);
 });
