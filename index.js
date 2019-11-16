@@ -8,7 +8,7 @@ const { sendContentToUser } = require("./getData");
 const { DefaultKeyboad } = require("./keyboardOptions");
 const { saveUserData, saveUserClick } = require("./analytics");
 
-const petMap = {
+const petsMap = {
   Собачка: "dog",
   Котик: "cat",
   Панда: "panda",
@@ -23,7 +23,7 @@ bot.on("message", ({ chat, text, from }) => {
   const langCode = from.language_code;
 
   if (text == "/start") {
-    const start_message = `Привет, ${userName}! Я могу отправить фото и факт о твоем любимом питомце =)`;
+    const start_message = `Привет, ${userName}! Я могу отправить фото и факт о твоем любимом животном =)`;
     bot.sendMessage(chatId, start_message, DefaultKeyboad);
     saveUserData(chatId, langCode, userName);
 
@@ -40,5 +40,5 @@ bot.on("message", ({ chat, text, from }) => {
     );
   }
 
-  saveUserClick(petMap[pet]);
+  saveUserClick(petsMap[pet]);
 });
