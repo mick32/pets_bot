@@ -31,7 +31,7 @@ bot.on("message", ({ chat, text, from }) => {
   }
 
   try {
-    sendContentToUser(chatId, petMap[pet]);
+    sendContentToUser(chatId, petsMap[pet]);
   } catch (e) {
     bot.sendMessage(
       chatId,
