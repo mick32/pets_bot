@@ -6,7 +6,11 @@ const bot = new TelegramBot(token, { polling: true });
 
 const { sendContentToUser } = require("./getData");
 const { DefaultKeyboad } = require("./keyboardOptions");
-const { saveUserData, saveUserClick } = require("./analytics");
+const {
+  saveUserData,
+  saveUserClick,
+  saveClicksByAdvertiseTag
+} = require("./analytics");
 
 const petsMap = {
   Собачка: "dog",
@@ -21,9 +25,20 @@ bot.on("message", ({ chat, text, from }) => {
   const [pet] = text.split(" ");
   const userName = chat.first_name;
   const langCode = from.language_code;
+  const start_message = `Привет, ${userName}! Я могу отправить фото и факт о твоем любимом животном =)`;
+  const withAdvertise = text.match(/\/start (.+)/) !== null;
+
+  if (withAdvertise) {
+    const advTag = text.match(/\/start (.+)/)[1];
+
+    saveClicksByAdvertiseTag(advTag);
+    saveUserData(chatId, langCode, userName);
+    bot.sendMessage(chatId, start_message, DefaultKeyboad);
+
+    return;
+  }
 
   if (text == "/start") {
-    const start_message = `Привет, ${userName}! Я могу отправить фото и факт о твоем любимом животном =)`;
     bot.sendMessage(chatId, start_message, DefaultKeyboad);
     saveUserData(chatId, langCode, userName);
 

@@ -24,6 +24,19 @@ const saveUserData = (chatId, from, firstname) => {
   });
 };
 
+const saveClicksByAdvertiseTag = tag => {
+  const docRef = db.ref(`advert/${tag}/${date}`);
+
+  docRef.transaction(currentData => {
+    if (!currentData) {
+      return { clicks: 1 };
+    }
+
+    const currentClicks = currentData.clicks;
+    return { clicks: currentClicks + 1 };
+  });
+};
+
 const saveUserClick = pet => {
   const docRef = db.ref(`analytics/${date}`);
 
@@ -48,3 +61,4 @@ const saveUserClick = pet => {
 
 exports.saveUserClick = saveUserClick;
 exports.saveUserData = saveUserData;
+exports.saveClicksByAdvertiseTag = saveClicksByAdvertiseTag;
