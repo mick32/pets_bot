@@ -9,7 +9,7 @@ admin.initializeApp({
 });
 
 const db = admin.database();
-const date = new Date().toLocaleDateString("ru-RU");
+const date = format(new Date(), "yyyy-MM-dd");
 
 const saveUserData = (chatId, from, firstname) => {
   const docRef = db.ref(`users/${chatId}`);
@@ -23,7 +23,6 @@ const saveUserData = (chatId, from, firstname) => {
 };
 
 const saveUserClick = pet => {
-  const date = new Date().toLocaleDateString();
   const docRef = db.ref(`analytics/${date}`);
 
   docRef.transaction(currentData => {

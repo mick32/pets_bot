@@ -30,6 +30,15 @@ bot.on("message", ({ chat, text, from }) => {
     return;
   }
 
+  if (!petsMap[pet]) {
+    bot.sendMessage(
+      chatId,
+      `К сожалению, я не знаю такого животного :( Попробуйте выбрать кого-то на появившейся клавиатуре`,
+      DefaultKeyboad
+    );
+    return;
+  }
+
   try {
     sendContentToUser(chatId, petsMap[pet]);
   } catch (e) {
