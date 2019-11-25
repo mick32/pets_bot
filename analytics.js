@@ -25,6 +25,7 @@ const saveUserData = (chatId, from, firstname) => {
 };
 
 const saveClicksByAdvertiseTag = tag => {
+  const date = format(new Date(), "yyyy-MM-dd");
   const docRef = db.ref(`advert/${tag}/${date}`);
 
   docRef.transaction(currentData => {
@@ -38,6 +39,7 @@ const saveClicksByAdvertiseTag = tag => {
 };
 
 const saveUserClick = pet => {
+  const date = format(new Date(), "yyyy-MM-dd");
   const docRef = db.ref(`analytics/${date}`);
 
   docRef.transaction(currentData => {
