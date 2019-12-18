@@ -45,9 +45,18 @@ const sendNotifications = async () => {
 
   try {
     for (let subscriber of subscribers) {
-      bot.sendPhoto(subscriber, photoUrl, {
-        caption: message
-      });
+      bot
+        .sendPhoto(subscriber, photoUrl, {
+          caption: message
+        })
+        .then(() => {
+          return;
+        })
+        .catch(error => {
+          if (error.response && error.response.statusCode === 403) {
+            console.log(subscriber);
+          }
+        });
     }
   } catch (e) {
     console.log("oops, something is wrong");
