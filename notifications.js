@@ -23,7 +23,6 @@ const getSubscribers = async () => {
   for (let user in usersInfo) {
     if (usersInfo[user].hasOwnProperty("last_usage")) {
       const { last_usage, id } = usersInfo[user];
-
       const differenceDays = differenceInCalendarDays(
         currentDate,
         new Date(last_usage)
@@ -41,12 +40,14 @@ const getSubscribers = async () => {
 const sendNotifications = async () => {
   const subscribers = await getSubscribers();
   const message =
-    "Привет! Не забывай посмотреть на своих любимых зверушек. Они скучают по тебе =)";
+    "Не забывай посмотреть и узнать что-то новое о любимых зверушках. Они скучают по тебе =)";
+  const photoUrl = "https://memchik.ru/images/templates/kot_shrek.jpg";
 
   try {
     for (let subscriber of subscribers) {
-      // bot.sendMessage(subscriber, message);
-      console.log(`send message to: ${subscriber}`);
+      bot.sendPhoto(subscriber, photoUrl, {
+        caption: message
+      });
     }
   } catch (e) {
     console.log("oops, something is wrong");
