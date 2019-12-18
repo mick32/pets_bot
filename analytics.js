@@ -11,9 +11,9 @@ admin.initializeApp({
 });
 
 const db = admin.database();
-const date = format(new Date(), "yyyy-MM-dd");
 
 const saveUserData = (chatId, from, firstname) => {
+  const date = format(new Date(), "yyyy-MM-dd");
   const docRef = db.ref(`users/${chatId}`);
 
   docRef.set({
