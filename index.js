@@ -64,5 +64,6 @@ bot.on("message", ({ chat, text, from }) => {
     );
   }
 
+  saveUserData(chatId, langCode, userName);
   saveUserClick(petsMap[pet]);
 });
