@@ -1,6 +1,7 @@
 require("dotenv").config();
 const TelegramBot = require("node-telegram-bot-api");
 const { differenceInCalendarDays } = require("date-fns");
+const cron = require("node-cron");
 const token = process.env.TOKEN;
 const bot = new TelegramBot(token);
 
@@ -63,4 +64,12 @@ const sendNotifications = async () => {
   }
 };
 
-sendNotifications();
+cron.schedule(
+  "0 19 * * *",
+  () => {
+    sendNotifications();
+  },
+  {
+    timezone: "Russia/Moscow"
+  }
+);
