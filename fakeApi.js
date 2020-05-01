@@ -271,15 +271,11 @@ const petsFacts = {
   }
 };
 
-function objectLength(pet) {
-  return Object.keys(petsFacts[pet]).length;
-}
+const objectLength = (pet) => Object.keys(petsFacts[pet]).length;
 
-function getRandomInt(max) {
-  return Math.floor(Math.random() * (max - 0)) + 0;
-}
+const getRandomInt = (max) => Math.floor(Math.random() * (max - 0)) + 0;
 
-function getRandomFact(pet) {
+const getRandomFact = (pet) => {
   const randomNum = getRandomInt(objectLength(pet));
 
   return Promise.resolve({ fact: petsFacts[pet][randomNum] });

@@ -9,7 +9,7 @@ const serviceAccount = require("./serviceAccountKey.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://petstestbot.firebaseio.com"
+  databaseURL: process.env.DB_URL
 });
 
 const db = admin.database();
